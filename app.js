@@ -122,7 +122,7 @@ for(let i = 0; i < tableRow.length; i++) {
 
 
 // Game Controls
-function restart(){
+function restart() {
     clear_board();
     finalText.removeChild(finalText.childNodes[0]);
     finalText.style.visibility = "hidden";
