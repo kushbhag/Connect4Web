@@ -68,7 +68,25 @@
                 </table>
             </div>
         </div>
+        <div class="controller">
+            <div class="row">
+                <div class="col-4">
+                    <button type="button" class="btn btn-primary btn-control" onclick="firstPlayer()">First Player</button>
+                </div>
+                <div class="col-4">
+                    <button type="button" class="btn btn-primary btn-control" onclick="secondPlayer()">Second Player</button>
+                </div>
+                <div class="col-4">
+                    <button type="button" class="btn btn-primary btn-control" onclick="twoPlayers()">2 Players</button>
+                </div>
+            </div>
+            <div class="row">
+                <button type="button" class="btn btn-secondary btn-reset" onclick="restart()">New Game</button>
+            </div>
+        </div>
+        <script src="game.js"></script>
+        <script src="ai.js"></script>
+        <script src="player.js"></script>
         <script src="app.js"></script>
-        <button type="button" class="btn btn-primary" onclick="restart()">Restart</button>
     </body>
 </html>
