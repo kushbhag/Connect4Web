@@ -18,23 +18,15 @@ function clear_board() {
     }
 }
 
-function lowestValidRow(col){
-    for (let i = 0; i < ROW_SIZE; i++) {
-        if (board[i][col] === 0){
-            return i;
-        }
-    }
-    return -1;
-}
-
 clear_board();
 for(let i = 0; i < tableRow.length; i++) {
     tableRow[i].addEventListener('click', (e) => {
-        player.makeMove(e.target.cellIndex);
-        if (!theGame.checkGame()){
-            ai.makeMove();
-            theGame.checkGame();
+        player.makeMove(e.target.cellIndex, board);
+        if (!theGame.checkGame(board)){
+            ai.makeMove(board);
+            theGame.checkGame(board);
         }
+        console.log(board);
     });
 }
 
@@ -57,7 +49,7 @@ function restart() {
     }
     playerTurn = 'player1';
     if (ai.playerTurn === 'player1') {
-        ai.makeMove(); // Making first move
+        ai.makeMove(board); // Making first move
     }
 }
 

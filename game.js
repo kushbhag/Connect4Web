@@ -1,6 +1,15 @@
 class Game {
     constructor() { }
 
+    lowestValidRow(col, board){
+        for (let i = 0; i < ROW_SIZE; i++) {
+            if (board[i][col] === 0){
+                return i;
+            }
+        }
+        return -1;
+    }
+
     drawBoard(row, col, turn) {
         let columns = tableRow[row].getElementsByTagName('td');
         let div = document.createElement("div");
@@ -24,7 +33,7 @@ class Game {
         playerTurn = playerTurn === 'player1' ? 'player2' : 'player1';
     }
 
-    gameOver() {
+    gameOver(board) {
         for (let row = 0; row < ROW_SIZE-3; row++){
             for (let col = 0; col < COL_SIZE; col++){
                 if (board[row][col] === board[row+1][col] &&
@@ -71,8 +80,8 @@ class Game {
         return null;
     }
 
-    checkGame() {
-        let finish = this.gameOver();
+    checkGame(board) {
+        let finish = this.gameOver(board);
         if (finish !== null){
             this.drawBoard(ROW_SIZE - finish[0][0] - 1, finish[0][1], 'win');
             this.drawBoard(ROW_SIZE - finish[1][0] - 1, finish[1][1], 'win');

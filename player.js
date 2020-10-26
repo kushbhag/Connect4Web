@@ -1,13 +1,15 @@
-class AI extends Game {
+class Player extends Game {
     constructor(playerTurn) {
         super();
         this.playerTurn = playerTurn;
     }
 
-    makeMove(board = null) {
-        if (this.playerTurn !== 'player0'){
-            let row = lowestValidRow(3);
-            theGame.makeMove(row, 3);
+    makeMove(col, board) {
+        let row = this.lowestValidRow(col, board);
+
+        if (row === -1){
+            return;
         }
+        theGame.makeMove(row, col);
     }
 }
