@@ -59,9 +59,10 @@ class AI extends Game {
             score += 1;
             if (empty_count === 2) {
                 score += 1;
-            }
-            if (opposition_count == 2) {
+            } else if (opposition_count == 2) {
                 score -= 1;
+            } else if (empty_count == 1) {
+                score -= 0;
             }
         }
         if (opposition_count === 3) {
@@ -71,10 +72,9 @@ class AI extends Game {
             } else if (player_count === 1) {
                 score += 1;
             }
-        } 
-        // else if (opposition_count === 4){
-        //     score -= 7;
-        // }
+        } else if (opposition_count === 4){
+            score -= 20;
+        }
         return score;
     }
 
