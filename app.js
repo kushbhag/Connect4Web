@@ -3,6 +3,8 @@ var tableRow = document.getElementsByTagName('tr');
 var tableCell = document.getElementsByTagName('td');
 var finalText = document.getElementById('finaltext');
 var tableSlot = document.querySelector('.board');
+var redPieceController = document.getElementById('redPieceController');
+var yellowPieceController = document.getElementById('yellowPieceController');
 
 var playerTurn = 'player1';
 var player = new Player('player1');
@@ -16,6 +18,13 @@ function clear_board() {
     for (let i = 0; i < ROW_SIZE; i++) {
         board[i] = [0, 0, 0, 0, 0, 0, 0];
     }
+    redPieceController.style.opacity = 1;
+    yellowPieceController.style.opacity = 0.3;
+}
+
+function turnController() {
+    yellowPieceController.style.opacity = redPieceController.style.opacity;
+    redPieceController.style.opacity = 1.3 - redPieceController.style.opacity;
 }
 
 clear_board();
@@ -26,7 +35,7 @@ for(let i = 0; i < tableRow.length; i++) {
             ai.makeMove(board);
             theGame.checkGame(board);
         }
-        console.log(board);
+        //console.log(board);
     });
 }
 

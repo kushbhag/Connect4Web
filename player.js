@@ -11,5 +11,6 @@ class Player extends Game {
             return;
         }
         theGame.makeMove(row, col);
+        turnController();
     }
 }

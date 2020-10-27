@@ -187,6 +187,7 @@ class AI extends Game {
             let theMove = this.minimax(tempBoard, 5, -Infinity, Infinity, true);
             let row = this.lowestValidRow(theMove[0], tempBoard);
             theGame.makeMove(row, theMove[0]);
+            turnController();
             //this.scorePosition(this.playerTurn, tempBoard);
         }
     }
