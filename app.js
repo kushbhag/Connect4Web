@@ -26,6 +26,7 @@ function clear_board() {
     for (let i = 0; i < ROW_SIZE; i++) {
         board[i] = [0, 0, 0, 0, 0, 0, 0];
     }
+
     redPieceController.style.opacity = 1;
     yellowPieceController.style.opacity = 0.3;
 }
@@ -36,11 +37,14 @@ function turnController() {
 }
 
 clear_board();
+var newAi = new AIBetter();
+var currPos = new Position(board, [0, 0, 0, 0, 0, 0, 0], 0);
 for(let i = 0; i < tableRow.length; i++) {
     tableRow[i].addEventListener('click', (e) => {
         let check = player.makeMove(e.target.cellIndex, board);
         if (check && !theGame.checkGame(board, player.playerTurn)){
             ai.makeMove(board);
+            // newAi.solve(currPos);
             theGame.checkGame(board, ai.playerTurn);
         }
     });

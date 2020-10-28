@@ -28,6 +28,9 @@ class Game {
 
     makeMove(row, col) {
         let turn = playerTurn === 'player1' ? 1 : 2;
+        // console.log(board);
+        // console.log(col);
+        // console.log(row);
         board[row][col] = turn;
         this.drawBoard(ROW_SIZE - row - 1, col, playerTurn);
         playerTurn = playerTurn === 'player1' ? 'player2' : 'player1';

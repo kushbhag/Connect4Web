@@ -192,11 +192,148 @@ class AI extends Game {
     }
 }
 
+class Position {
+    constructor(board, height, moves){
+        this.board = board; // The Board
+        this.height = height; // Number of stones per column
+        this.moves = moves; // The number of moves made
+        this.WIDTH = 7;
+        this.HEIGHT = 6;
+    }
 
-// class AIBetter extends Game {
-//     board: [];
-//     constructor(){
+    canPlay(col) {
+        return this.height[col] < this.HEIGHT;
+    }
 
-//     }
-//     negamax ()
-// }
+    play(col) {
+        this.board[this.height[col]][col] = 1 + this.moves%2;
+        this.height[col]++;
+        this.moves++;
+    }
+
+    isWinningMove(col) {
+        let current_player = 1 + this.moves % 2;
+        if (this.height[col] >= 3 && 
+            this.board[this.height[col]-1][col] === current_player &&
+            this.board[this.height[col]-2][col] === current_player &&
+            this.board[this.height[col]-3][col] === current_player){
+            return true;
+        }
+        let leftMost = col - 3 < 0 ? 0: col-3;
+        let rightMost = col + 3 >= 7 ? 6 : col + 3;
+        let topMost = this.height[col] + 3 >= this.HEIGHT ? 5 : this.height[col] + 3;
+        let bottomMost = this.height[col] - 3 < 0 ? 0 : this.height[col] - 3;
+        let x = 0;
+        // console.log(this.board);
+        // console.log(rightMost);
+        // console.log(leftMost);
+        for (let i  = leftMost; i <= rightMost; i ++){
+            if (this.height[i] >= this.HEIGHT) break;
+            if (this.board[this.height[i]][i] === current_player){
+                x++;
+            }
+            if (x >= 3){
+                return true;
+            }
+        }
+
+        // CHECK
+        x = 0;
+        for (let i = leftMost, j = topMost; i <= rightMost && j >= bottomMost; i++, j--){
+            if (this.board[j][i] === current_player){
+                x ++;
+            } else if (i !== col){
+                x = 0;
+            }
+            if (x >= 3){
+                return true;
+            }
+        }
+        for (let i = leftMost, j = bottomMost; i <= rightMost && j <= topMost; i++, j++){
+            if (this.board[j][i] === current_player){
+                x++;
+            } else if (i !== col){
+                x = 0;
+            }
+            if (x >= 3){
+                return true;
+            }
+        }
+    }
+}
+
+class AIBetter {
+    constructor() {
+        this.nodeCount = 0;
+        this.columnOrder = [];
+        this.columnOrder[0] = 3;
+        this.columnOrder[1] = 4;
+        this.columnOrder[2] = 2;
+        this.columnOrder[3] = 5;
+        this.columnOrder[4] = 1;
+        this.columnOrder[5] = 6;
+        this.columnOrder[6] = 0;
+    }
+
+    copyPosition(position) {
+        let ret = [];
+        for (let i = 0; i < position.board.length; i ++){
+            ret[i] = position.board[i].slice();
+        }
+        let retPos = new Position(ret, [...position.height], position.moves);
+        return retPos;
+    }
+
+    negaMax(position, alpha, beta, depth) {
+        if (alpha > beta){
+            throw 'Alpha > Beta';
+        }
+        this.nodeCount ++;
+
+        if (position.moves == 42){
+            return [0, 0];
+        }
+
+        for (let x = 0; x < COL_SIZE; x++){
+            if (position.canPlay(x) && position.isWinningMove(x)){
+                return [(COL_SIZE*ROW_SIZE +1 - position.moves)/2, x];
+            }
+        }
+
+        if (depth === 0) {
+            return [0, 0];
+        }
+        // let max = (COL_SIZE*ROW_SIZE-1 - position.moves)/2;
+        // if (beta > max){
+        //     beta = max;
+        //     if (alpha >= beta) return beta;
+        // }
+
+        let bestAction = 0;
+        for (let x = 0; x < COL_SIZE; x ++) {
+            if (position.canPlay(this.columnOrder[x])) {
+                let position2 = this.copyPosition(position);
+                position2.play(this.columnOrder[x]);
+
+                let score = -this.negaMax(position2, -beta, -alpha)[0];
+                // console.log(score);
+                if (score >= beta){
+                    return [score, this.columnOrder[x]];
+                }
+                if (score > alpha){
+                    alpha = score;
+                    bestAction = this.columnOrder[x];
+                }
+            }
+        }
+        return [alpha, bestAction];
+    }
+
+    solve(position) {
+        console.log(position);
+        let pos = this.negaMax(position, -COL_SIZE*ROW_SIZE/2, COL_SIZE*ROW_SIZE/2, 6)[1];
+        theGame.makeMove(position.height[pos], pos);
+        position.play(pos);
+        turnController();
+    }
+}
