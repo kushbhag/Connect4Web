@@ -91,7 +91,7 @@ table{
     width: 35vw;
     height: 3vw;
     top: 0.5rem;
-    left: 50%;
+    left: 60%;
     transform: translate(-50%);
     text-align: center;
     font-size: 40px;
@@ -128,3 +128,110 @@ table{
     margin-right: 0;
     margin-bottom: 3px;
 }
+.controllerSmall {
+    position: absolute;
+    visibility: hidden;
+}
+
+@media (max-width: 1400px){
+    .container{
+        position: absolute;
+        width: 60vw;
+        height: 50vw;
+        left: 60%;
+        transform: translate(-50%);
+    }
+
+    .controller{
+        left: 60%;
+        top: 58vw;
+        transform: translate(-50%);
+    }
+
+    .turn-controller{
+        top: 50%;
+        left: 5vw;
+        transform: translateY(-50%);
+    }
+
+    .finaltext{
+        top: 20%;
+        left: 5vw;
+    }
+}
+
+
+@media (max-width: 1000px){
+    .container{
+        position: absolute;
+        width: 80vw;
+        height: 64vw;
+        left: 50%;
+        transform: translate(-50%);
+    }
+
+    .controller{
+        visibility: hidden;
+    }
+    .controllerSmall{
+        width: 20vw;
+        left: 50%;
+        top: 75vw;
+        transform: translate(-50%);
+        visibility: visible;
+    }
+
+    .turn-controller {
+        top: 80vw;
+        left: 15vw;
+    }
+
+    .finaltext{
+        top: 75vw;
+        left: 65vw;
+    }
+
+    .title {
+        left: 50%;
+        transform: translate(-50%);
+        width: 60vw;
+    }
+}
+
+@media (max-width: 500px) {
+    .container{
+        width: 100vw;
+        height: 80vw;
+    }
+    .turn-controller {
+        top: 60vh;
+    }
+
+    .title {
+        width: 100vw;
+        font-size: 30px;
+    }
+    .controller{
+        top: 100vw;
+        width: 80vw;
+        transform: translate();
+    }
+}
+
+/* @media (pointer:coarse) {
+
+    .container{
+        background-color: red;
+        width: 1000px;
+    }
+
+    .controller {
+        visibility: hidden;
+    }
+    .controllerSmall {
+        left: 60%;
+        top: 58vw;
+        transform: translate(-50%);
+        visibility: visible;
+    }
+} */
