@@ -49,11 +49,11 @@ class AI extends Game {
         if (player_count === 4) {
             score += 100;
         } else if (player_count === 3) {
-            score += 3;
+            score += 5;
             if (empty_count === 1) {
                 score += 2;
             } else if (opposition_count === 1) {
-                score -= 2;
+                score -= 3;
             }
         } else if (player_count === 2) {
             score += 1;
@@ -84,7 +84,7 @@ class AI extends Game {
 
         // Scoring Center column
         let centerCol = this.boardCol(3, tempBoard);
-        score += 3*(centerCol.filter(val => val === piece)).length;
+        score += 10*((centerCol.filter(val => val === piece)).length);
 
         // Scoring Horizontal pieces
         for (let row = 0; row < ROW_SIZE; row ++){
@@ -112,7 +112,7 @@ class AI extends Game {
                 four_piece.push(tempBoard[row+1][col+1]);
                 four_piece.push(tempBoard[row+2][col+2]);
                 four_piece.push(tempBoard[row+3][col+3]);
-                score += this.evaluate(four_piece, piece);
+                score += 3*this.evaluate(four_piece, piece);
             }
         }
         for (let row = ROW_SIZE-1; row >= 3; row --){
@@ -122,7 +122,7 @@ class AI extends Game {
                 four_piece.push(tempBoard[row-1][col+1]);
                 four_piece.push(tempBoard[row-2][col+2]);
                 four_piece.push(tempBoard[row-3][col+3]);
-                score += this.evaluate(four_piece, piece);
+                score += 3*this.evaluate(four_piece, piece);
             }
         }
         return score;
@@ -133,9 +133,9 @@ class AI extends Game {
         if (finished !== null) {
             let turn = this.playerTurn === 'player1' ? 1 : 2;
             if (board[finished[0][0]][finished[0][1]] === turn) {
-                return [null, (depth+1)*100000000000];
+                return [null, (depth+1)*1000000];
             } else {
-                return [null, (depth+1)*-100000000000]
+                return [null, (depth+1)*-1000000]
             }
         }
         if (depth === 0) {
@@ -188,7 +188,15 @@ class AI extends Game {
             let row = this.lowestValidRow(theMove[0], tempBoard);
             theGame.makeMove(row, theMove[0]);
             turnController();
-            //this.scorePosition(this.playerTurn, tempBoard);
         }
     }
 }
+
+
+// class AIBetter extends Game {
+//     board: [];
+//     constructor(){
+
+//     }
+//     negamax ()
+// }

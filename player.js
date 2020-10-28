@@ -8,9 +8,10 @@ class Player extends Game {
         let row = this.lowestValidRow(col, board);
 
         if (row === -1){
-            return;
+            return false;
         }
         theGame.makeMove(row, col);
         turnController();
+        return true;
     }
 }

@@ -22,7 +22,6 @@
                 </span>
             </div>
         </div>
-        <div class="finaltext" id="finaltext"></div>
         <div class="container">
             <div class="game">
                 <table>
@@ -86,17 +85,27 @@
         <div class="controller">
             <div class="row">
                 <div class="col-4">
-                    <button type="button" class="btn btn-primary btn-control" onclick="firstPlayer()">First Player</button>
+                    <button type="button" id="firstPlayButton" class="btn btn-primary btn-control" onclick="firstPlayer(this)">First Player</button>
                 </div>
                 <div class="col-4">
-                    <button type="button" class="btn btn-primary btn-control" onclick="secondPlayer()">Second Player</button>
+                    <button type="button" id="secondPlayButton" class="btn btn-primary btn-control" onclick="secondPlayer()">Second Player</button>
                 </div>
                 <div class="col-4">
-                    <button type="button" class="btn btn-primary btn-control" onclick="twoPlayers()">2 Players</button>
+                    <button type="button" id="twoPlayButton" class="btn btn-primary btn-control" onclick="twoPlayers()">2 Players</button>
                 </div>
             </div>
             <div class="row">
-                <button type="button" class="btn btn-secondary btn-reset" onclick="restart()">New Game</button>
+                <div class="col-12">
+                    <button type="button" class="btn btn-secondary btn-reset" onclick="restart()">New Game</button>
+                </div>
+            </div>
+        </div>
+        <div class="finaltext">
+            <div class="row">
+                <div class="col-12" id="finalPiece"></div>
+            </div>
+            <div class="row">
+                <div class="col-12" id="finalText"></div>
             </div>
         </div>
         <script src="game.js"></script>

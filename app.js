@@ -1,10 +1,18 @@
 // Selectors
 var tableRow = document.getElementsByTagName('tr');
 var tableCell = document.getElementsByTagName('td');
-var finalText = document.getElementById('finaltext');
+var finalText = document.getElementById('finalText');
+var finalPiece = document.getElementById('finalPiece');
 var tableSlot = document.querySelector('.board');
 var redPieceController = document.getElementById('redPieceController');
 var yellowPieceController = document.getElementById('yellowPieceController');
+
+let firstPlayButton = document.getElementById('firstPlayButton');
+let secondPlayButton = document.getElementById('secondPlayButton');
+let twoPlayButton = document.getElementById('twoPlayButton');
+firstPlayButton.style.opacity = 1;
+secondPlayButton.style.opacity = 0.5;
+twoPlayButton.style.opacity = 0.5;
 
 var playerTurn = 'player1';
 var player = new Player('player1');
@@ -30,12 +38,11 @@ function turnController() {
 clear_board();
 for(let i = 0; i < tableRow.length; i++) {
     tableRow[i].addEventListener('click', (e) => {
-        player.makeMove(e.target.cellIndex, board);
-        if (!theGame.checkGame(board)){
+        let check = player.makeMove(e.target.cellIndex, board);
+        if (check && !theGame.checkGame(board, player.playerTurn)){
             ai.makeMove(board);
-            theGame.checkGame(board);
+            theGame.checkGame(board, ai.playerTurn);
         }
-        //console.log(board);
     });
 }
 
@@ -44,7 +51,7 @@ for(let i = 0; i < tableRow.length; i++) {
 function restart() {
     clear_board();
     if (finalText.hasChildNodes()) finalText.removeChild(finalText.childNodes[0]);
-    finalText.style.visibility = "hidden";
+    if (finalPiece.hasChildNodes()) finalPiece.removeChild(finalPiece.childNodes[0]);
     for (let row = 0; row < ROW_SIZE; row ++){
         for (let col = 0; col < COL_SIZE; col ++){
             let columns = tableRow[row].getElementsByTagName('td');
@@ -63,18 +70,27 @@ function restart() {
 }
 
 function firstPlayer() {
+    firstPlayButton.style.opacity = 1;
+    secondPlayButton.style.opacity = 0.5;
+    twoPlayButton.style.opacity = 0.5;
     player.playerTurn = 'player1';
     ai.playerTurn = 'player2';
     restart();
 }
 
 function secondPlayer() {
+    firstPlayButton.style.opacity = 0.5;
+    secondPlayButton.style.opacity = 1;
+    twoPlayButton.style.opacity = 0.5;
     player.playerTurn = 'player2';
     ai.playerTurn = 'player1';
     restart();
 }
 
 function twoPlayers() {
+    firstPlayButton.style.opacity = 0.5;
+    secondPlayButton.style.opacity = 0.5;
+    twoPlayButton.style.opacity = 1;
     player.playerTurn = 'player1';
     ai.playerTurn = 'player0';
     restart();

@@ -27,7 +27,7 @@ table{
     width: 50vw;
     height: 5vw;
     left: 50%;
-    top: 50vw;
+    top: 45vw;
     transform: translate(-50%);
 }
 
@@ -66,14 +66,24 @@ table{
 
 .finaltext{
     position: absolute;
-    background-color:rgba(0, 0, 0, 0.3);
-    visibility: hidden;
-    top: 8rem;
-    left: 50%;
-    transform: translate(-50%);
-    width: 20%;
-    height: 5%;
-    z-index: 2;
+    width: 20vw;
+    height: 10vw;
+    top: 20vw;
+    right: 5%;
+}
+
+.finaltext img {
+    position: relative;
+    height: 5vw;
+    width: 5vw;
+    margin-left: 50%;
+    transform: translate(-60%);
+    opacity: inherit;
+}
+#finalText {
+    position: relative;
+    text-align: center;
+    font-size: 2vw;
 }
 
 .title {

@@ -80,16 +80,25 @@ class Game {
         return null;
     }
 
-    checkGame(board) {
+    checkGame(board, winningPlayer) {
         let finish = this.gameOver(board);
         if (finish !== null){
             this.drawBoard(ROW_SIZE - finish[0][0] - 1, finish[0][1], 'win');
             this.drawBoard(ROW_SIZE - finish[1][0] - 1, finish[1][1], 'win');
             this.drawBoard(ROW_SIZE - finish[2][0] - 1, finish[2][1], 'win');
             this.drawBoard(ROW_SIZE - finish[3][0] - 1, finish[3][1], 'win');
-            var t = document.createElement("H1").appendChild(document.createTextNode("Player Won"));
-            finalText.appendChild(t);
-            finalText.style.visibility = "visible";
+
+            let img = document.createElement("img");
+            if (winningPlayer === 'player1'){
+                let text = document.createTextNode('Player 1 wins');
+                finalText.appendChild(text);
+                img.setAttribute('src', 'board/red.svg');
+            } else {
+                let text = document.createTextNode('Player 2 wins');
+                finalText.appendChild(text);
+                img.setAttribute('src', 'board/yellow.svg');
+            }
+           finalPiece.appendChild(img);
 
             for(let i = 0; i < tableCell.length; i++) {
                 tableCell[i].style.pointerEvents = 'none';
