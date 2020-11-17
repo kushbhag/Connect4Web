@@ -1,4 +1,5 @@
-# 🎲 Connect 4 Web 🎲
+<h1 align="center">🎲 Connect 4 Web 🎲</h1>
+
 This project was inspired by the Intro to AI course I took online offered by <a href="https://online-learning.harvard.edu/course/cs50s-introduction-artificial-intelligence-python?delta=0">Harvard</a>. Simply enough, it is an algorithm that I implemented to basically win every game of connect 4. Feel free to try and beat it <a href="https://kushbhag.github.io/Connect4Web/">here</a>, and if you do, email me with a screenshot and I'll buy you a cookie 🍪.
 
 ## How it works?
